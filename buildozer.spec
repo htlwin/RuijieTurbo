@@ -17,7 +17,7 @@ android.permissions = INTERNET, ACCESS_WIFI_STATE, ACCESS_NETWORK_STATE
 android.api = 31
 android.minapi = 21
 android.ndk_api = 21
-android.ndk = 23b
+android.ndk = 25b
 android.skip_update = False
 android.accept_sdk_license = True
 
