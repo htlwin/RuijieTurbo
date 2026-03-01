@@ -41,7 +41,7 @@ android.api = 31
 
 # (int) Minimum API support (Android 5.0 အထက်)
 android.minapi = 21
-android.ndk_api = 31
+android.ndk_api = 21
 # (bool) If True, then automatically accept SDK license
 # build လုပ်စဉ် license မေးတာကို အလိုအလျောက် ကျော်သွားစေဖို့ ဖြစ်ပါတယ်
 android.accept_sdk_license = True
