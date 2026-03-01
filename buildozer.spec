@@ -19,8 +19,8 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 1.0
 
 # (list) Application requirements
-# requests, urllib3 နဲ့ certifi တို့ကို မဖြစ်မနေ ထည့်သွင်းပေးထားပါတယ်
-requirements = python3, kivy, requests, urllib3, certifi, libffi
+# requests, urllib3 နဲ့ certifi တို့က bypass logic အတွက် အဓိက လိုအပ်ပါတယ်
+requirements = python3, kivy, requests, urllib3, certifi
 
 # (list) Supported orientations
 orientation = portrait
@@ -33,26 +33,36 @@ fullscreen = 0
 #
 
 # (list) Permissions
-# Network စစ်ဆေးဖို့နဲ့ Internet သုံးဖို့ လိုအပ်တဲ့ Permissions များ
+# WiFi အခြေအနေ စစ်ဆေးရန်နှင့် Internet သုံးရန် လိုအပ်သော permissions များ
 android.permissions = INTERNET, ACCESS_WIFI_STATE, ACCESS_NETWORK_STATE
 
-# (int) Target Android API (Android 12/13 အတွက် 33 သို့မဟုတ် 31 ထားခြင်းက အဆင်ပြေဆုံးပါ)
+# (int) Target Android API (Android 12 အတွက် 31 က အကောင်းဆုံးပါ)
 android.api = 31
 
 # (int) Minimum API support (Android 5.0 အထက်)
 android.minapi = 21
+
+# (int) Android NDK API (Stability အတွက် 21 ထားပါသည်)
 android.ndk_api = 21
+
 # (bool) If True, then automatically accept SDK license
-# build လုပ်စဉ် license မေးတာကို အလိုအလျောက် ကျော်သွားစေဖို့ ဖြစ်ပါတယ်
+# GitHub Actions မှာ license မေးတာကို အလိုအလျောက် ကျော်ရန် ဖြစ်သည်
 android.accept_sdk_license = True
 
+# (str) Android manifest meta-data 
+# အရေးကြီးဆုံးအချက် - Router IP (192.168.110.1) ဆီသို့ HTTP traffic ပေးပို့ခွင့်ပြုရန် ဖြစ်သည်
+android.meta_data = android:usesCleartextTraffic="true"
+
 # (list) The Android archs to build for
-# Redmi Note 11 Pro 5G (Snapdragon 750) အတွက် arm64-v8a ကို အဓိကထားပါတယ်
+# Poco X7 Pro (64-bit) အတွက် arm64-v8a ကို အဓိကထားသည်
 android.archs = arm64-v8a
 
 # (bool) Indicate whether the screen should stay on
-# Script run နေစဉ် ဖုန်း screen မပိတ်သွားစေဖို့ True ထားပေးပါ
+# Bypass လုပ်နေစဉ် ဖုန်း screen မပိတ်သွားစေရန်
 android.wakelock = True
+
+# (str) Android logcat filters to use
+android.logcat_filters = *:S python:D
 
 [buildozer]
 
