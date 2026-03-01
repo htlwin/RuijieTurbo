@@ -10,12 +10,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Java 17 ကို အသုံးပြုခြင်း (Gradle Version အသစ်များအတွက် လိုအပ်သည်)
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      # Gradle 8.7 ကို အသေအချာ သတ်မှတ်ပေးခြင်း
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: 8.7
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -39,4 +44,3 @@ jobs:
         with:
           name: RuijieTurbo-APK
           path: bin/*.apk
-          
