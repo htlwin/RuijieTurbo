@@ -24,6 +24,9 @@ jobs:
 
       - name: Build with Buildozer
         run: |
+          # Android SDK licenses တွေကို အလိုအလျောက် အတည်ပြုရန်
+          mkdir -p ~/.android && touch ~/.android/repositories.cfg
+          # Buildozer ကို run ရန် (yes က license အားလုံးကို အလိုအလျောက် OK နှိပ်ပေးပါလိမ့်မည်)
           yes | buildozer -v android debug
         
       - name: Upload APK
@@ -31,4 +34,3 @@ jobs:
         with:
           name: RuijieTurbo-APK
           path: bin/*.apk
-          
