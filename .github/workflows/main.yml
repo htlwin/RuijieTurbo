@@ -10,6 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Java 17 ကို အသုံးပြုခြင်း (Gradle Version အသစ်များအတွက် လိုအပ်သည်)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -24,9 +31,7 @@ jobs:
 
       - name: Build with Buildozer
         run: |
-          # Android SDK licenses တွေကို အလိုအလျောက် အတည်ပြုရန်
           mkdir -p ~/.android && touch ~/.android/repositories.cfg
-          # Buildozer ကို run ရန် (yes က license အားလုံးကို အလိုအလျောက် OK နှိပ်ပေးပါလိမ့်မည်)
           yes | buildozer -v android debug
         
       - name: Upload APK
@@ -34,3 +39,4 @@ jobs:
         with:
           name: RuijieTurbo-APK
           path: bin/*.apk
+          
