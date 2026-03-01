@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Java 17 ကို အသုံးပြုခြင်း (Gradle Compatibility အတွက်)
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -30,11 +31,15 @@ jobs:
 
       - name: Build with Buildozer
         run: |
-          # အရင်ကကျန်ခဲ့သော အမှားဟောင်းများကို အကုန်ရှင်းထုတ်ရန်
+          # ၁။ အရင်ကကျန်ခဲ့သော Error အဟောင်းများကို အမြစ်ပြတ်ရှင်းထုတ်ရန်
           rm -rf .buildozer/
+          
+          # ၂။ Android SDK config ဖန်တီးရန်
           mkdir -p ~/.android && touch ~/.android/repositories.cfg
-          # License error မတက်စေရန်နှင့် Build ချောမွေ့စေရန်
-          yes | buildozer -v android debug
+          
+          # ၃။ Broken pipe မဖြစ်စေရန် buildozer ကို တိုက်ရိုက် run ခြင်း
+          # (.spec ဖိုင်တွင် android.accept_sdk_license = True ထည့်ထားရန် လိုသည်)
+          buildozer -v android debug
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
