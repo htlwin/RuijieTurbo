@@ -16,12 +16,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Gradle 8.7 ကို အသေအချာ သတ်မှတ်ပေးခြင်း
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
-        with:
-          gradle-version: 8.7
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -32,10 +26,12 @@ jobs:
           sudo apt update
           sudo apt install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev build-essential
           pip install --upgrade pip
-          pip install buildozer cython==0.29.33 kivy
+          pip install buildozer cython==0.29.33 kivy requests urllib3 certifi
 
       - name: Build with Buildozer
         run: |
+          # အရင်ကကျန်ခဲ့တဲ့ gradle အမှားဟောင်းများကို ရှင်းထုတ်ရန်
+          rm -rf .buildozer/android/platform/build-arm64-v8a/dists
           mkdir -p ~/.android && touch ~/.android/repositories.cfg
           yes | buildozer -v android debug
         
